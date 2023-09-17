@@ -1,1 +1,0 @@
-This program use bootstrap v4.6 and JS
