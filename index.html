@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DataSaver</title>
+    <meta charset="utf-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- Latest compiled and minified Bootstrap 4.6 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <!-- CSS script -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Latest Font-Awesome CDN -->
+    <script src="https://kit.fontawesome.com/64087b922b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <section id="homeSection" class="container-lg mt-5">
+        <div class="row border border-info bg-light rounded tableShadow">
+            <!-- left side -->
+            <div class="col-3 p-0 text-center heightLeftTable scroll">
+                <table class="table table-info table-bordered m-0" id="allCompanyTable">
+                    <thead class="">
+                        <tr>
+                            <th class="h5 border-info">List With All Companies</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyLeftCompanyTable"></tbody>
+                </table>
+            </div>
+            <!-- right side -->
+            <div class="col-9">
+                <div class="row border-bottom border-info p-2">
+                    <div class="col-6">
+                        <form class="input-group">
+                            <input id="mainSearch" class="form-control" type="search"
+                                list="mainSearchDataListSuggestions" aria-describedby="mainSearchBtn"
+                                placeholder="Search Company..." />
+                            <datalist id="mainSearchDataListSuggestions"></datalist>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <!-- Add invoice -->
+                            <button type="button" id="openAddInvoiceModalBtn" class="btn btn-info mr-3"
+                                data-toggle="modal" data-target="#addInvoiceModal">
+                                Add Invoice
+                            </button>
+                            <div class="modal fade" id="addInvoiceModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Fill All Inputs Below</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="addInvoiceForm">
+                                                <input type="text" id="selectCompanyNameInvoiceModal"
+                                                    list="invoiceDataListSuggestions" class="form-control mb-3"
+                                                    placeholder="Select Company Name..." />
+                                                <div class="error"></div>
+                                                <datalist id="invoiceDataListSuggestions"></datalist>
+                                                <input type="number" id="addInvoiceNumberModal"
+                                                    class="form-control mb-3" placeholder="Enter Invoice Number..." />
+                                                <div class="error"></div>
+
+                                                <input type="text" id="addSumNumberModal" class="form-control mb-3"
+                                                    placeholder="Enter Invoice Sum..." />
+                                                <div class="error"></div>
+
+                                                <input type="date" data-date-format="DD MM YYYY"
+                                                    id="addInvoiceDateModal" class="form-control mb-3"
+                                                    placeholder="Enter Invoice Date..." />
+                                            </form>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                Discard
+                                            </button>
+                                            <button id="addInvoiceModalBtn" type="button" class="btn btn-success">
+                                                Add Invoice
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add company btn -->
+                            <button type="button" id="openAddCompanyModalBtn" class="btn btn-outline-info"
+                                data-toggle="modal" data-target="#addCompanyModal">
+                                Add Company
+                            </button>
+                            <div class="modal fade" id="addCompanyModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Fill All Inputs Below</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="formAddCompany">
+                                                <input type="text" id="addCompanyNameModal" required
+                                                    class="form-control mb-3" placeholder="Enter Company Name..." />
+                                                <div class="error"></div>
+                                                <input type="number" class="form-control mb-3" required
+                                                    id="addCompanyBankAccModal"
+                                                    placeholder="Bank Account of a Company..." />
+                                                <div class="error"></div>
+                                                <input type="tel" class="form-control" required
+                                                    id="addCompanyNumberModal" placeholder="Company tel number..." />
+                                                <div class="error"></div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="discardCompanyModalBtn" class="btn btn-danger"
+                                                data-dismiss="modal">
+                                                Discard
+                                            </button>
+                                            <button id="addCompanyModalBtn" type="button" class="btn btn-success">
+                                                Add Company
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 p-0 scroll heightRightTable">
+                        <table class="table table-bordered table-active table-info m-0 text-center" id="mainTable">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Company <i class="fa-solid fa-sort"></i></th>
+                                    <th>Invoice Number</th>
+                                    <th>Sum <i class="fa-solid fa-sort"></i></th>
+                                    <th>Expiration Date <i class="fa-solid fa-sort"></i></th>
+                                    <th>Paid/Unpaid <i class="fa-solid fa-sort"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyRightMain"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="companySection" class="container-lg mt-5 ">
+        <!-- Blanc Modal -->
+        <div class="row border border-info bg-light rounded tableShadow heightLeftTable">
+            <div class="col-4 p-4 d-flex flex-column">
+                <h1 id="blancH1" class="mb-5"></h1>
+                <p>Company Bank Account Number: <span id="blancBankAcc"></span></p>
+                <p>Company Tel Number: <span id="blancTel"></span></p>
+                <div class="mt-auto align-self-end w-100">
+                    <!-- edit -->
+                    <button id="blancPageEditBtn" class="btn btn-sm btn-warning">Edit Company</button>
+                    <!-- delete -->
+                    <button type="button" id="blancPageDeleteBtnOpenModal" class="btn btn-sm btn-danger"
+                        data-toggle="modal" data-target="#blancPageDeleteBtnOpenModalDiv">
+                        Delete Company
+                    </button>
+                    <div class="modal fade" id="blancPageDeleteBtnOpenModalDiv" tabindex="-1" role="dialog"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <p>Are you sure you want to Delete Company?</p>
+                                    <button type="button" class="btn btn-sm  btn-info" data-dismiss="modal">
+                                        Discard
+                                    </button>
+                                    <button id="blancPageDeleteBtn" class="btn btn-sm btn-danger">Delete
+                                        Company</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button id="blancPageBackBtn" class="btn btn-sm btn-outline-info mt-4">Back</button>
+                </div>
+            </div>
+            <div class="col-8 p-4">
+                <ul id="blancUl" class="list-group scroll heightRightTable"></ul>
+            </div>
+        </div>
+
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="ha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+        crossorigin="anonymous"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/addcompany.js"></script>
+    <script src="./js/addInvoice.js"></script>
+    <script src="./js/companyPage.js"></script>
+</body>
+
+</html>

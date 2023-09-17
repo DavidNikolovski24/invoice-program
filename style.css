@@ -1,0 +1,35 @@
+.heightLeftTable {
+  height: calc(95vh - 50px);
+}
+
+.heightRightTable {
+  height: calc(95vh - 100px);
+}
+.scroll {
+  overflow: auto;
+}
+#invoiceUlSuggestions {
+  z-index: 100000 !important;
+}
+.tableShadow {
+  box-shadow: 0px 0px 100px 1px #bee5eb;
+}
+tr:hover {
+  background-color: rgb(134 207 216 / 15%);
+}
+#bodyLeftCompanyTable {
+  cursor: pointer;
+}
+#companySection {
+  display: none;
+}
+#homeSection {
+  display: none;
+}
+.error {
+  color: red;
+  text-align: left;
+}
+.fa-sort {
+  cursor: pointer;
+}
